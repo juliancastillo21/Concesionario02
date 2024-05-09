@@ -1,9 +1,9 @@
 const firebaseConfig = {
-    apiKey: "AIzaSyB69KejR0YpgObZjBxymNL70ess0M1MMA8",
-    authDomain: "concesionario-377e2.firebaseapp.com",
-    projectId: "concesionario-377e2",
-    storageBucket: "concesionario-377e2.appspot.com",
-    messagingSenderId: "180787248447",
-    appId: "1:180787248447:web:32bee503feb54e3bfea78a"
-};
+    apiKey: "AIzaSyByCkLFFMHgoh1T1pGf_sMuMPn98PQZVNk",
+    authDomain: "concesionario-3877b.firebaseapp.com",
+    projectId: "concesionario-3877b",
+    storageBucket: "concesionario-3877b.appspot.com",
+    messagingSenderId: "510570712933",
+    appId: "1:510570712933:web:e81733ea143f3f4da61b8c"
+  };
 export default firebaseConfig;
