@@ -33,6 +33,8 @@ npm install @react-navigation/native-stack
 npm install @react-navigation/material-top-tabs
 npm install react-native-pager-view
 npm i firebase
+npm i lodash
+npx patch-package native-base
 ```
 
 
