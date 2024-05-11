@@ -5,9 +5,6 @@ import { useNavigation } from '@react-navigation/native';
 import Catalogue from './Catalogue';
 import FirebaseContext from '../../context/firebase/firebaseContext';
 
-
-
-
 const Home = () => {
   const navigation = useNavigation();
   const { Catalogues, obtenercatalogue } = useContext(FirebaseContext)
@@ -17,38 +14,40 @@ const Home = () => {
   }, []);
 
   return (
-    <View style={styles.contenedor}>
-      <Text style={styles.titulo}>Nuestro Catálogo</Text>
-      <TextInput
-        label="Buscar..."
-        style={styles.entradaBusqueda}
-      />
-      
+    <ScrollView>
+      <View style={styles.contenedor}>
+        <Text style={styles.titulo}>Nuestro Catálogo</Text>
+        <TextInput
+          label="Buscar..."
+          style={styles.entradaBusqueda}
+        />
         <View>
           {Catalogues.map((NuestroCatalogue, i) => {
             const { description, id, name, price, urlImagen } = NuestroCatalogue
             return (
-              
               <Fragment key={id}>
                 <Card>
-                  <Card.Cover source={{ uri:urlImagen }} />
+                  <Card.Cover source={{ uri: urlImagen }} />
+                  <Text>{name}</Text>
+                  <Text>{description}</Text>
+                  <Text>{price}</Text>
+                  <Button mode="contained" onPress={() => navigation.navigate('Buy')}>
+                   Detalle
+                  </Button>
                 </Card>
-                <Text>{name}</Text>
-                <Text>{description}</Text>
-                <Text>{price}</Text>
               </Fragment>
-              
             )
           }
           )}
         </View>
-      
-      {navigation && (
-        <Button mode="contained" onPress={() => navigation.navigate('Offer')}>
-          Ir a la Siguiente Pantalla
-        </Button>
-      )}
-    </View>
+
+        {navigation && (
+          <Button mode="contained" onPress={() => navigation.navigate('Offer')}>
+            Ir a la Siguiente Pantalla
+          </Button>
+        )}
+      </View>
+    </ScrollView>
   );
 };
 
