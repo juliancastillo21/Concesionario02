@@ -1,6 +1,6 @@
 import React, { Fragment, useContext, useEffect } from 'react';
-import { View, StyleSheet,ScrollView,Image } from 'react-native';
-import { Text, TextInput, Button, List } from 'react-native-paper';
+import { View, StyleSheet, ScrollView } from 'react-native';
+import { Text, TextInput, Button, List, Avatar, Card } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import Catalogue from './Catalogue';
 import FirebaseContext from '../../context/firebase/firebaseContext';
@@ -14,7 +14,7 @@ const Home = () => {
 
   useEffect(() => {
     obtenercatalogue();
-  },[]);
+  }, []);
 
   return (
     <View style={styles.contenedor}>
@@ -23,23 +23,26 @@ const Home = () => {
         label="Buscar..."
         style={styles.entradaBusqueda}
       />
-      <ScrollView>
-      <View>
-        {Catalogues.map((NuestroCatalogue,i) => {
-          const { description, id, name, price, urlImagen } = NuestroCatalogue
-          return (
-            <Fragment key={id}>
+      
+        <View>
+          {Catalogues.map((NuestroCatalogue, i) => {
+            const { description, id, name, price, urlImagen } = NuestroCatalogue
+            return (
+              
+              <Fragment key={id}>
+                <Card>
+                  <Card.Cover source={{ uri:urlImagen }} />
+                </Card>
                 <Text>{name}</Text>
                 <Text>{description}</Text>
                 <Text>{price}</Text>
-                <Image source={{uri:urlImagen}} />
-                
-            </Fragment>
-          )
-        }
-        )}
-      </View>
-      </ScrollView>
+              </Fragment>
+              
+            )
+          }
+          )}
+        </View>
+      
       {navigation && (
         <Button mode="contained" onPress={() => navigation.navigate('Offer')}>
           Ir a la Siguiente Pantalla
