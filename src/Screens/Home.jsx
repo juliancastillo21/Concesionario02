@@ -85,8 +85,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#00913f',
   },
-  navigationButton: {
-    marginTop: 16,
-  },
+  navigationButton:{
+    marginTop: 5,
+    marginBottom: 25
+  }
 });
 export default Home;
