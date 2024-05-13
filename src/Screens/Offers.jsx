@@ -54,7 +54,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   offersContainer: {
-    marginBottom: 20,
+    marginBottom: 30,
+    padding: 20,
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    elevation: 4, 
   },
   imageOffers: {
     width: '100%',
@@ -63,29 +67,29 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   titleOffers: {
-    marginTop: 5,
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#FCB2F8'
+    marginTop: 10,
+    fontSize: 20,
+    color: '#000',
   },
-  title:{
-    marginTop: 5,
-    fontSize: 18,
+  title: {
+    marginTop: 10,
+    fontSize: 24,
     fontWeight: 'bold',
-    color:'#030303',
-    textAlign: 'center'
+    color: '#000',
+    textAlign: 'center',
+    marginBottom: 20,
   },
-
   descriptionOffers: {
-    marginTop: 5,
+    marginTop: 10,
     fontSize: 16,
-    color:'#030303',
+    color: '#333',
+    lineHeight: 24, // Aumenta el espacio entre líneas
   },
   priceOffers: {
-    marginTop: 5,
-    fontSize: 16,
+    marginTop: 10,
+    fontSize: 18,
     fontWeight: 'bold',
-    color: 'green',
+    color: '#00913f',
   },
 });
 
