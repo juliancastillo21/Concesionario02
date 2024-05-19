@@ -1,144 +1,144 @@
-import React, {useState} from 'react'
-import {View, Modal,ScrollView} from 'react-native';
-import { StyleSheet,Image,Text } from 'react-native'
-import { Button, TextInput } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
+import React, { useContext } from "react";
+import { useNavigation } from "@react-navigation/native";
+import { Card, Title, Paragraph, Button,Text } from "react-native-paper";
+import CatalogueContext from "../../context/catalogue/catalogueContext";
+import { View, StyleSheet, Image } from "react-native";
 
-const Buy = ({route}) => {
-  const navigation = useNavigation(); 
-  if (!route || !route.params) {
-    return <Text>Error: Parámetros de ruta no encontrados.</Text>;
+const Buy = () => {
+  const navigation = useNavigation();
+  const { NuestroCatalogue } = useContext(CatalogueContext);
+
+  // Verificar si hay datos en NuestroCatalogue
+  if (!NuestroCatalogue) {
+    return (
+      <View style={styles.container}>
+        <Paragraph style={styles.noDataText}>No hay datos disponibles</Paragraph>
+      </View>
+    );
   }
 
-  const [modalVisible, setModalVisible] = useState(0);
+  const { description, id, name, price, urlImagen,cylinder,MaximumPower,Torque, TankCapacity} = NuestroCatalogue;
 
-  const Modalhome = () => {
-    setModalVisible(true);
-  };
-
-  const Modalclose = () => {
-    setModalVisible(false);
-  };
-
-  const navigateToInsurance = () => {
-    Modalclose()
-    navigation.navigate('Sure');
-  };
-
-  
-  const {  urlImagen,
-    description,
-    price,
-    name } = route?.params;
   return (
-    <ScrollView>
-    <View>
     <View style={styles.container}>
-        <Text>
-           Carro a comprar
-        </Text>
-        <View>
-          <Image
-              source={{uri:urlImagen,}}
-              style={styles.img}
-          />
-          <View style={styles.infoContainer}>
-            <Text style={styles.title}>{name}</Text>
-            <Text style={styles.title}>{description}</Text>
-            <Text style={styles.price}>$ {price}</Text>
+      <Card style={styles.card}>
+        <Image source={{ uri: urlImagen }} style={styles.image} />
+        <Card.Content style={styles.cardContent}>
+          <Title style={styles.title}>{name}</Title>
+          <Paragraph style={styles.description}>{description}</Paragraph>
+          <Paragraph style={styles.price}>${price}</Paragraph>
+        </Card.Content>
+      </Card>
+      <Card style={[styles.specCard, { backgroundColor: "black" }]}>
+        <Card.Content style={styles.specCardContent}>
+          <Text style={styles.titleEs}>Especificaciones</Text>
+          <View style={styles.specRow}>
+            <Text style={styles.specLabel}>Cilindrada:</Text>
+            <Text style={styles.specValue}>{cylinder}</Text>
           </View>
-        </View>
-        <View style={styles.container}>
-        <Text style={styles.title}>Datos de envio</Text>
-      <TextInput
-        label="Nombre"
-        style={styles.input}
-      />
-      <TextInput
-        label="Pais"
-        style={styles.input}
-      />
-      <TextInput
-        label="Direccion"
-        style={styles.input}
-      /> 
-      <Button icon="" mode="contained" onPress={() =>Modalhome()}>Comprar    </Button>
-      </View>
-         
-    </View>
-    <Modal
-        visible={modalVisible}
-      >
-        <View style={styles.modalContainer}>
-          <Text style={styles.modalTitle}>Felicidades carro comprado</Text>
-          <View style={styles.buttonStyle}>
-          <Button mode="contained" onPress={() =>navigateToInsurance()} >
-          Muestrame los seguros
-          </Button>
-
+          <View style={styles.specRow}>
+            <Text style={styles.specLabel}>Potencia Máxima:</Text>
+            <Text style={styles.specValue}>{MaximumPower}</Text>
           </View>
-          <Button mode="contained" onPress={() => Modalclose()}  style={styles.button}>
-           No, no quiero seguro. Terminar compra.
-          </Button>
-        </View>
-      </Modal>
+          <View style={styles.specRow}>
+            <Text style={styles.specLabel}>Torque:</Text>
+            <Text style={styles.specValue}>{Torque}</Text>
+          </View>
+          <View style={styles.specRow}>
+            <Text style={styles.specLabel}>Capacidad Tanque:</Text>
+            <Text style={styles.specValue}>{TankCapacity}</Text>
+          </View>
+        </Card.Content>
+      </Card>
+      <Card.Actions style={styles.cardActions}>
+        <Button
+          mode="contained"
+          onPress={() => navigation.navigate("Offer", { itemId: id })}
+          style={styles.button}
+        >
+          Ir a la Siguiente Pantalla
+        </Button>
+      </Card.Actions>
     </View>
-    </ScrollView>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
-    padding: 10,
-    backgroundColor: '#fff', 
-    borderRadius: 5, 
-    shadowColor: '#000',
-    height: "100%"
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#f5f5f5",
   },
-  img: {
-    width: 250,
+  card: {
+    width: "90%",
+    marginVertical: 10,
+    elevation: 5,
+  },
+  image: {
+    width: "100%",
     height: 200,
-    marginBottom: 10, 
-    borderWidth: 2, 
-    borderColor: 'black', 
+    resizeMode: "cover",
   },
-  infoContainer: {
-    alignItems: 'center', 
+  cardContent: {
+    padding: 16,
   },
   title: {
     fontSize: 20,
-    color: '#333', 
-    marginBottom: 5, 
+    fontWeight: "bold",
+    marginBottom: 8,
   },
-  modalTitle: {
-    fontSize: 20,
-    color: '#333', 
-    marginBottom: 5,
-    marginLeft: "20%"
+  description: {
+    marginBottom: 8,
+    fontSize: 16,
   },
   price: {
-    fontSize: 20,
-    fontWeight: 'bold', 
-    color: '#4CAF50',
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#00913f',
   },
- input: {
-    width: 250,
-    marginBottom: 20,
-    borderWidth: 1,
-    borderColor: '#ccc',
+  specCard: {
+    width: "90%",
+    marginVertical: 10,
+    elevation: 5,
   },
-  modalContainer: {
-    display: "flex",
-    justifyContent: 'center',
-    alignContent: 'center',
-    height: "100%",
-    width: "100%",
-    padding: "5rem"
+  specCardContent: {
+    padding: 16,
   },
-  buttonStyle: {
-    marginTop: 10,
-    marginBottom: 10
-  }
+  specRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 8,
+  },
+  specLabel: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  specValue: {
+    color: "white",
+    fontSize: 16,
+  },
+  cardActions: {
+    justifyContent: "center",
+    marginVertical: 16,
+  },
+  button: {
+    backgroundColor: "#2196f3",
+  },
+  noDataText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#808080",
+  },
+  titleEs: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: 'white',
+    textAlign: 'center',
+    marginVertical: 20,
+    textTransform: 'uppercase',
+  },
 });
-export default Buy
+
+export default Buy;
