@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { Card, Title, Paragraph, Button } from "react-native-paper";
+import { Card, Title, Paragraph, Button,Text } from "react-native-paper";
 import CatalogueContext from "../../context/catalogue/catalogueContext";
 import { View, StyleSheet, Image } from "react-native";
 
@@ -17,7 +17,7 @@ const Buy = () => {
     );
   }
 
-  const { description, id, name, price, urlImagen } = NuestroCatalogue;
+  const { description, id, name, price, urlImagen,cylinder,MaximumPower,Torque, TankCapacity} = NuestroCatalogue;
 
   return (
     <View style={styles.container}>
@@ -28,16 +28,37 @@ const Buy = () => {
           <Paragraph style={styles.description}>{description}</Paragraph>
           <Paragraph style={styles.price}>${price}</Paragraph>
         </Card.Content>
-        <Card.Actions style={styles.cardActions}>
-          <Button
-            mode="contained"
-            onPress={() => navigation.navigate("Offer", { itemId: id })}
-            style={styles.button}
-          >
-            Ir a la Siguiente Pantalla
-          </Button>
-        </Card.Actions>
       </Card>
+      <Card style={[styles.specCard, { backgroundColor: "black" }]}>
+        <Card.Content style={styles.specCardContent}>
+          <Text style={styles.titleEs}>Especificaciones</Text>
+          <View style={styles.specRow}>
+            <Text style={styles.specLabel}>Cilindrada:</Text>
+            <Text style={styles.specValue}>{cylinder}</Text>
+          </View>
+          <View style={styles.specRow}>
+            <Text style={styles.specLabel}>Potencia Máxima:</Text>
+            <Text style={styles.specValue}>{MaximumPower}</Text>
+          </View>
+          <View style={styles.specRow}>
+            <Text style={styles.specLabel}>Torque:</Text>
+            <Text style={styles.specValue}>{Torque}</Text>
+          </View>
+          <View style={styles.specRow}>
+            <Text style={styles.specLabel}>Capacidad Tanque:</Text>
+            <Text style={styles.specValue}>{TankCapacity}</Text>
+          </View>
+        </Card.Content>
+      </Card>
+      <Card.Actions style={styles.cardActions}>
+        <Button
+          mode="contained"
+          onPress={() => navigation.navigate("Offer", { itemId: id })}
+          style={styles.button}
+        >
+          Ir a la Siguiente Pantalla
+        </Button>
+      </Card.Actions>
     </View>
   );
 };
@@ -51,7 +72,7 @@ const styles = StyleSheet.create({
   },
   card: {
     width: "90%",
-    marginVertical: 20,
+    marginVertical: 10,
     elevation: 5,
   },
   image: {
@@ -69,13 +90,38 @@ const styles = StyleSheet.create({
   },
   description: {
     marginBottom: 8,
+    fontSize: 16,
   },
   price: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#00913f',
+  },
+  specCard: {
+    width: "90%",
+    marginVertical: 10,
+    elevation: 5,
+  },
+  specCardContent: {
+    padding: 16,
+  },
+  specRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 8,
+  },
+  specLabel: {
+    color: "white",
+    fontSize: 16,
     fontWeight: "bold",
+  },
+  specValue: {
+    color: "white",
+    fontSize: 16,
   },
   cardActions: {
     justifyContent: "center",
-    marginBottom: 16,
+    marginVertical: 16,
   },
   button: {
     backgroundColor: "#2196f3",
@@ -84,6 +130,14 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     color: "#808080",
+  },
+  titleEs: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: 'white',
+    textAlign: 'center',
+    marginVertical: 20,
+    textTransform: 'uppercase',
   },
 });
 
