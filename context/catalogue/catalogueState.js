@@ -2,7 +2,7 @@ import React,{ useReducer} from "react";
 import CatalogueContext from "./catalogueContext";
 import CatalogueReducer from "./catalogueReducer";
 import { SELECCIONAR_PRODUCTO } from "../../types";
-
+import { CONFIRMAR_COMPRA } from "../../types";
 
 const CatalogueState = props =>{
     // Crear estado inicial
@@ -20,12 +20,31 @@ const CatalogueState = props =>{
         })
     }
 
+    //Cuando se confirma el pedido
+    const guardarCompra = compra =>{
+        dispatch({
+            type: CONFIRMAR_COMPRA,
+            payload: compra
+        })
+    }
+
+    //Eliminar un articulo
+    const eliminarCarro = id =>{
+        dispatch({
+            type: ELIMINAR_CARRO,
+            payload: id
+        })
+    }
+
     return(
         <CatalogueContext.Provider
             value={{
                 catalogo: state.catalogo,
                 NuestroCatalogue: state.NuestroCatalogue,
-                seleccionarProducto
+                total: state.total,
+                seleccionarProducto,
+                guardarCompra,
+                eliminarCarro
             }}
         >
             {props.children}

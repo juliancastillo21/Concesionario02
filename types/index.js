@@ -5,3 +5,5 @@ export const OBTENER_CATALOGUE = 'OBTENER_CATALOGUE'
 
 //estodos de los pedidos 
 export const SELECCIONAR_PRODUCTO = 'SELECCIONAR_PRODUCTO'  
+export const CONFIRMAR_COMPRA = 'CONFIRMAR_COMPRA'
+export const ELIMINAR_CARRO = 'ELIMINAR_CARRO'
