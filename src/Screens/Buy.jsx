@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { Card, Title, Paragraph, Button,Text } from "react-native-paper";
+import { Card, Title, Paragraph, Button, Text } from "react-native-paper";
 import CatalogueContext from "../../context/catalogue/catalogueContext";
-import { View, StyleSheet, Image } from "react-native";
+import { View, StyleSheet, Image, ScrollView } from "react-native";
 
 const Buy = () => {
   const navigation = useNavigation();
@@ -17,49 +17,58 @@ const Buy = () => {
     );
   }
 
-  const { description, id, name, price, urlImagen,cylinder,MaximumPower,Torque, TankCapacity} = NuestroCatalogue;
+  const { description, id, name, price, urlImagen, cylinder, MaximumPower, Torque, TankCapacity } = NuestroCatalogue;
 
   return (
-    <View style={styles.container}>
-      <Card style={styles.card}>
-        <Image source={{ uri: urlImagen }} style={styles.image} />
-        <Card.Content style={styles.cardContent}>
-          <Title style={styles.title}>{name}</Title>
-          <Paragraph style={styles.description}>{description}</Paragraph>
-          <Paragraph style={styles.price}>${price}</Paragraph>
-        </Card.Content>
-      </Card>
-      <Card style={[styles.specCard, { backgroundColor: "black" }]}>
-        <Card.Content style={styles.specCardContent}>
-          <Text style={styles.titleEs}>Especificaciones</Text>
-          <View style={styles.specRow}>
-            <Text style={styles.specLabel}>Cilindrada:</Text>
-            <Text style={styles.specValue}>{cylinder}</Text>
-          </View>
-          <View style={styles.specRow}>
-            <Text style={styles.specLabel}>Potencia Máxima:</Text>
-            <Text style={styles.specValue}>{MaximumPower}</Text>
-          </View>
-          <View style={styles.specRow}>
-            <Text style={styles.specLabel}>Torque:</Text>
-            <Text style={styles.specValue}>{Torque}</Text>
-          </View>
-          <View style={styles.specRow}>
-            <Text style={styles.specLabel}>Capacidad Tanque:</Text>
-            <Text style={styles.specValue}>{TankCapacity}</Text>
-          </View>
-        </Card.Content>
-      </Card>
-      <Card.Actions style={styles.cardActions}>
-        <Button
-          mode="contained"
-          onPress={() => navigation.navigate("Offer", { itemId: id })}
-          style={styles.button}
-        >
-          Ir a la Siguiente Pantalla
-        </Button>
-      </Card.Actions>
-    </View>
+    <ScrollView>
+      <View style={styles.container}>
+        <Card style={styles.card}>
+          <Image source={{ uri: urlImagen }} style={styles.image} />
+          <Card.Content style={styles.cardContent}>
+            <Title style={styles.title}>{name}</Title>
+            <Paragraph style={styles.description}>{description}</Paragraph>
+            <Paragraph style={styles.price}>${price}</Paragraph>
+            <Button
+              mode="contained"
+              style={styles.navigationButton}
+              onPress={() => navigation.navigate('Credit')}
+            >
+              Comprar
+            </Button>
+          </Card.Content>
+        </Card>
+        <Card style={[styles.specCard, { backgroundColor: "black" }]}>
+          <Card.Content style={styles.specCardContent}>
+            <Text style={styles.titleEs}>Especificaciones</Text>
+            <View style={styles.specRow}>
+              <Text style={styles.specLabel}>Cilindrada:</Text>
+              <Text style={styles.specValue}>{cylinder}</Text>
+            </View>
+            <View style={styles.specRow}>
+              <Text style={styles.specLabel}>Potencia Máxima:</Text>
+              <Text style={styles.specValue}>{MaximumPower}</Text>
+            </View>
+            <View style={styles.specRow}>
+              <Text style={styles.specLabel}>Torque:</Text>
+              <Text style={styles.specValue}>{Torque}</Text>
+            </View>
+            <View style={styles.specRow}>
+              <Text style={styles.specLabel}>Capacidad Tanque:</Text>
+              <Text style={styles.specValue}>{TankCapacity}</Text>
+            </View>
+          </Card.Content>
+        </Card>
+        <Card.Actions style={styles.cardActions}>
+          <Button
+            mode="contained"
+            onPress={() => navigation.navigate("Offer", { itemId: id })}
+            style={styles.button}
+          >
+            Ir a la Siguiente Pantalla
+          </Button>
+        </Card.Actions>
+      </View>
+    </ScrollView>
   );
 };
 
@@ -138,6 +147,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginVertical: 20,
     textTransform: 'uppercase',
+  },
+  navigationButton: {
+    marginLeft: 200
   },
 });
 
