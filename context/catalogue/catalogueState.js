@@ -3,6 +3,7 @@ import CatalogueContext from "./catalogueContext";
 import CatalogueReducer from "./catalogueReducer";
 import { SELECCIONAR_PRODUCTO } from "../../types";
 import { CONFIRMAR_COMPRA } from "../../types";
+import {ELIMINAR_CARRO} from "../../types";
 
 const CatalogueState = props =>{
     // Crear estado inicial

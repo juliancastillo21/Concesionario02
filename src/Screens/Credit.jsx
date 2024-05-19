@@ -1,18 +1,16 @@
 import React, { useContext, useState } from 'react';
 import { View, StyleSheet, Alert } from 'react-native';
-import { Text, Button, TextInput, Paragraph, Card, CardActions} from 'react-native-paper';
+import { Text, Button, TextInput, Paragraph, Card } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import CatalogueContext from '../../context/catalogue/catalogueContext';
 
 const Credit = () => {
   const { NuestroCatalogue, guardarCompra } = useContext(CatalogueContext);
-  const { price = 0 } = NuestroCatalogue ?? {};
   const navigation = useNavigation();
-
   const [cantidad, setCantidad] = useState(1);
 
   // Verificar si hay datos en NuestroCatalogue
-  if (!price) {
+  if (!NuestroCatalogue) {
     return (
       <View>
         <Paragraph>No hay datos disponibles</Paragraph>
@@ -20,6 +18,7 @@ const Credit = () => {
     );
   }
 
+  const { price, urlImagen } = NuestroCatalogue;
   const total = price * cantidad;
 
   const decrementar = () => {
@@ -54,6 +53,10 @@ const Credit = () => {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.heading}>Tu carro</Text>
+      <Card>
+        <Card.Cover source={{ uri: urlImagen }} />
+      </Card>
       <Text style={styles.title}>Cantidad</Text>
       <View style={styles.quantityContainer}>
         <Button mode="contained" onPress={decrementar}>
@@ -82,8 +85,14 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
   },
-  title: {
+  heading: {
     fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 16,
+    textAlign: 'center',
+  },
+  title: {
+    fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 10,
   },
