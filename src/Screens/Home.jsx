@@ -3,14 +3,23 @@ import { StyleSheet, ScrollView } from 'react-native';
 import { Text, TextInput, Button, Card, Title, Paragraph } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import FirebaseContext from '../../context/firebase/firebaseContext';
+import CatalogueContext from '../../context/catalogue/catalogueContext';
 
 const Home = () => {
   const navigation = useNavigation();
   const { Catalogues, obtenercatalogue } = useContext(FirebaseContext);
 
+  const { seleccionarProducto } = useContext(CatalogueContext);
+
   useEffect(() => {
     obtenercatalogue();
   }, []);
+
+  const handleSelectProduct = (product) => { 
+    console.log('product: ', product);
+    seleccionarProducto(product);
+    navigation.navigate('Buy');
+  };
 
   return (
     <ScrollView style={styles.container}>
@@ -28,11 +37,11 @@ const Home = () => {
             <Card.Cover source={{ uri: urlImagen }} style={styles.productImage} />
             <Card.Content>
               <Title style={styles.productName}>{name}</Title>
-              <Paragraph style={styles.productDescription}>{description}</Paragraph>
+              <Paragraph style={styles.productDescription} numberOfLines={2}>{description}</Paragraph>
               <Paragraph style={styles.productPrice}>${price}</Paragraph>
             </Card.Content>
             <Card.Actions>
-              <Button mode="contained" onPress={() => navigation.navigate('Buy')}>
+              <Button mode="contained" onPress={() => handleSelectProduct(NuestroCatalogue) }>
                 Detalle
               </Button>
             </Card.Actions>
@@ -69,7 +78,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   productImage: {
-    width: '100%', // Agregamos esta línea
+    width: '100%', 
   },
   productName: {
     fontSize: 18,
