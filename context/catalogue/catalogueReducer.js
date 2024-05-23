@@ -13,7 +13,7 @@ export default (state, action) => {
         case CONFIRMAR_COMPRA:
             return{
                 ...state,
-                compra: [...state, action.payload]
+                compra: [action.payload]
             }
         case MOSTRAR_RESUMEN:
             return{
