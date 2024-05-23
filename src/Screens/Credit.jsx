@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import CatalogueContext from '../../context/catalogue/catalogueContext';
 
 const Credit = () => {
-  const { NuestroCatalogue, guardarCompra } = useContext(CatalogueContext);
+  const { NuestroCatalogue, guardarCompra, mostrarResumen,actualizarCantidad} = useContext(CatalogueContext);
   const navigation = useNavigation();
   const [cantidad, setCantidad] = useState(1);
 
@@ -24,11 +24,13 @@ const Credit = () => {
   const decrementar = () => {
     if (cantidad > 1) {
       setCantidad(cantidad - 1);
+      actualizarCantidad(cantidad - 1); // Actualizar la cantidad en el estado global
     }
   };
 
   const incrementar = () => {
     setCantidad(cantidad + 1);
+    actualizarCantidad(cantidad + 1); // Actualizar la cantidad en el estado global
   };
 
   const confirmarCompra = () => {
@@ -42,7 +44,7 @@ const Credit = () => {
             // Almacenar la compra, a la compra principal
             const compra = { ...NuestroCatalogue, cantidad, total };
             guardarCompra(compra);
-            // Navegar hacia resumen
+            mostrarResumen(total); // Actualizar el total en el estado global
             navigation.navigate('Summary');
           },
         },
@@ -72,6 +74,7 @@ const Credit = () => {
           +
         </Button>
       </View>
+      <Text style={styles.totalText}>Prdio del carro:{price}</Text>
       <Text style={styles.totalText}>Total: ${total}</Text>
       <Button mode="contained" onPress={confirmarCompra}>
         Confirmar compra

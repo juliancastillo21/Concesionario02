@@ -5,6 +5,7 @@ import { SELECCIONAR_PRODUCTO } from "../../types";
 import { CONFIRMAR_COMPRA } from "../../types";
 import {ELIMINAR_CARRO} from "../../types";
 import { MOSTRAR_RESUMEN } from "../../types";
+import { ACTUALIZAR_CANTIDAD } from "../../types";
 
 const CatalogueState = props =>{
     // Crear estado inicial
@@ -38,6 +39,10 @@ const CatalogueState = props =>{
         })
     }
 
+    const actualizarCantidad = cantidad => {
+        dispatch({ type: ACTUALIZAR_CANTIDAD, payload: cantidad });
+      };
+
     //Eliminar un articulo
     const eliminarCarro = id =>{
         dispatch({
@@ -52,10 +57,12 @@ const CatalogueState = props =>{
                 catalogo: state.catalogo,
                 NuestroCatalogue: state.NuestroCatalogue,
                 total: state.total,
+                cantidad: state.cantidad,
                 seleccionarProducto,
                 mostrarResumen,
                 guardarCompra,
-                eliminarCarro
+                eliminarCarro,
+                actualizarCantidad
             }}
         >
             {props.children}

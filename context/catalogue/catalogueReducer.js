@@ -1,6 +1,6 @@
 import { SELECCIONAR_PRODUCTO,
     CONFIRMAR_COMPRA,
-    ELIMINAR_CARRO, MOSTRAR_RESUMEN} from "../../types";
+    ELIMINAR_CARRO, MOSTRAR_RESUMEN,ACTUALIZAR_CANTIDAD} from "../../types";
     
 
 export default (state, action) => {
@@ -19,6 +19,11 @@ export default (state, action) => {
             return{
                ...state,
                 total: action.payload
+            }
+        case ACTUALIZAR_CANTIDAD:
+            return{
+                ...state,
+                cantidad: action.payload
             }
         case ELIMINAR_CARRO:
             return{
