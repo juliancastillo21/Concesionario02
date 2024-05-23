@@ -4,12 +4,14 @@ import CatalogueReducer from "./catalogueReducer";
 import { SELECCIONAR_PRODUCTO } from "../../types";
 import { CONFIRMAR_COMPRA } from "../../types";
 import {ELIMINAR_CARRO} from "../../types";
+import { MOSTRAR_RESUMEN } from "../../types";
 
 const CatalogueState = props =>{
     // Crear estado inicial
     const inicialState ={
         catalogo: [],
-        NuestroCatalogue: null
+        NuestroCatalogue: null,
+        total: 0
     }
     //Definir useReducer
     const[state, dispatch] = useReducer(CatalogueReducer, inicialState)
@@ -29,6 +31,13 @@ const CatalogueState = props =>{
         })
     }
 
+    const mostrarResumen = total => {
+        dispatch({
+            type: MOSTRAR_RESUMEN,
+            payload: total
+        })
+    }
+
     //Eliminar un articulo
     const eliminarCarro = id =>{
         dispatch({
@@ -44,6 +53,7 @@ const CatalogueState = props =>{
                 NuestroCatalogue: state.NuestroCatalogue,
                 total: state.total,
                 seleccionarProducto,
+                mostrarResumen,
                 guardarCompra,
                 eliminarCarro
             }}

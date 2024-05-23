@@ -43,7 +43,7 @@ const Credit = () => {
             const compra = { ...NuestroCatalogue, cantidad, total };
             guardarCompra(compra);
             // Navegar hacia resumen
-            navigation.navigate('ResumenCompra');
+            navigation.navigate('Summary');
           },
         },
         { text: 'Cancelar', style: 'cancel' },

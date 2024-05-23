@@ -1,6 +1,7 @@
 import { SELECCIONAR_PRODUCTO,
     CONFIRMAR_COMPRA,
-    ELIMINAR_CARRO} from "../../types";
+    ELIMINAR_CARRO, MOSTRAR_RESUMEN} from "../../types";
+    
 
 export default (state, action) => {
     switch(action.type){
@@ -13,6 +14,11 @@ export default (state, action) => {
             return{
                 ...state,
                 compra: [...state, action.payload]
+            }
+        case MOSTRAR_RESUMEN:
+            return{
+               ...state,
+                total: action.payload
             }
         case ELIMINAR_CARRO:
             return{
